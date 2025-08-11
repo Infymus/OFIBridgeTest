@@ -19,3 +19,13 @@ Important: You do not need to compile or use the entire Access Bridge Explorer s
 https://github.com/google/access-bridge-explorer/tree/master/src/WindowsAccessBridgeInterop
 
 Integrate this specific component into your C# testing project to enable communication with the Oracle Access Bridge.
+
+**Once compiled and ready - Enable Oracle Access Bridge**
+
+Install the latest version of Java. You do NOT need to install the JDK unless you want to.
+
+https://docs.oracle.com/javase/8/docs/technotes/guides/access/enable_and_test.html
+
+To enable Java Access Bridge, run the following command (where %JRE_HOME% is the directory of your JRE):
+
+%JRE_HOME%\bin\jabswitch -enable
