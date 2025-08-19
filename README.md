@@ -50,8 +50,6 @@ Follow these steps to get the testing solution up and running.
 
 * Configure Connection Strings: Modify the `AppSettings.json` file to enter your connection strings and Oracle-specific settings. The `DownloadDirectory` is where Chrome will place the Java JNLP file. Ensure that the user account running the tests (both locally and on a build server) has read and write access to this directory.
 
-* Configure Connection Strings: Modify the AppSettings.json file to enter your connection strings and Oracle-specific settings. The DownloadDirectory is where Chrome will place the Java JNLP file. Ensure that the user account running the tests (both locally and on a build server) has read and write access to this directory.
-
 * **Create User Secrets**: Create a user secrets file and configure it as needed for sensitive information.
 
 * Set up Azure DevOps Pipeline: In Azure DevOps, create a new pipeline and point it to the source code repository.
