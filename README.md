@@ -26,13 +26,14 @@ Using this framework, you can create comprehensive test suites for various aspec
 
 This solution is freely available under the MIT License. Feel free to fork, modify, and distribute it for your testing requirements.
 
-Prerequisites
+**Prerequisites**
+
 To use this solution, you will need the **Access Bridge Explorer** tool. Although the tool itself is no longer maintained, its interoperability components are essential for this solution.
 
 You can find the Access Bridge Explorer repository here:
 <br>https://github.com/google/access-bridge-explorer
 
-**Important:** You do not need the entire Access Bridge Explorer solution. This testing solution only requires the WindowsAccessBridgeInterop project from its source code. Specifically, you will need the contents located at:
+**Important:** You do not need the entire Access Bridge Explorer solution. This testing solution only requires the `WindowsAccessBridgeInterop` project from its source code. Specifically, you will need the contents located at:
 <br>https://github.com/google/access-bridge-explorer/tree/master/src/WindowsAccessBridgeInterop
 
 Integrate this specific component into your C# testing project to enable communication with the Oracle Access Bridge.
@@ -44,9 +45,9 @@ Follow these steps to get the testing solution up and running.
 * **Install Java**: Download and install the Java Runtime Environment (JRE). You do not need the JDK. Any version of JRE that includes jabswitch.exe in its bin directory will work.
 
 * **Enable the Oracle Access Bridge:**
-  - Navigate to your Java installation directory (%JRE_HOME%).
-  - Find the jabswitch program in the bin folder.
-  - Open a command prompt and run jabswitch -enable. You should see a confirmation message that the OAB is activated.
+  - Navigate to your Java installation directory (`%JRE_HOME%`).
+  - Find the `jabswitch` program in the bin folder.
+  - Open a command prompt in Adminstrator Mode and run jabswitch `-enable`. You should see a confirmation message that the OAB is activated.
 
 * **Configure Connection Strings**: Modify the `AppSettings.json` file to enter your connection strings and Oracle-specific settings. The `DownloadDirectory` is where Chrome will place the Java JNLP file. Ensure that the user account running the tests (both locally and on a build server) has read and write access to this directory.
 
