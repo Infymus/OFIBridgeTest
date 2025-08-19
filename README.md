@@ -48,16 +48,17 @@ Follow these steps to get the testing solution up and running.
   - Find the jabswitch program in the bin folder.
   - Open a command prompt and run jabswitch -enable. You should see a confirmation message that the OAB is activated.
 
-* Configure Connection Strings: Modify the `AppSettings.json` file to enter your connection strings and Oracle-specific settings. The `DownloadDirectory` is where Chrome will place the Java JNLP file. Ensure that the user account running the tests (both locally and on a build server) has read and write access to this directory.
+* **Configure Connection Strings**: Modify the `AppSettings.json` file to enter your connection strings and Oracle-specific settings. The `DownloadDirectory` is where Chrome will place the Java JNLP file. Ensure that the user account running the tests (both locally and on a build server) has read and write access to this directory.
 
 * **Create User Secrets**: Create a user secrets file and configure it as needed for sensitive information.
 
-* Set up Azure DevOps Pipeline: In Azure DevOps, create a new pipeline and point it to the source code repository.
+* **Set up Azure DevOps Pipeline**: This is not required to run locally but for running inside Pipelines. In Azure DevOps, create a new pipeline and point it to the source code repository. Configure your Yaml the way you like.
 
-* BaseTest.cs: This is the starting point for your tests. To debug locally without opening and closing a new Chrome instance for each test, set the BaseTestNoLaunch boolean to true. When running in the pipeline, this value should be false.
+* **BaseTest.cs**: This is the starting point for your tests. To debug locally without opening and closing a new Chrome instance for each test, set the BaseTestNoLaunch boolean to true. When running in the pipeline, this value should be false.
 
-* TestCases: Navigate to TestCases > SampleTestCase > SampleTest.cs to create the structure of your NUnit test cases, including any necessary parameters.
+* **TestCases**: Navigate to TestCases > SampleTestCase > SampleTest.cs to create the structure of your NUnit test cases, including any necessary parameters.
 
-* TestMethods: Use TestMethods > SampleTestMethod > SampleTestMethod.cs to organize your method calls, or you can keep everything within your main test method.
-1. NodeExtensions: All the calls to Oracle Forms are located in NodeExtensions. Pass the Oracle parent window as an argument to these calls.
+* **TestMethods**: Use TestMethods > SampleTestMethod > SampleTestMethod.cs to organize your method calls, or you can keep everything within your main test method.
+ 
+* **NodeExtensions**: All the calls to Oracle Forms are located in NodeExtensions. Pass the Oracle parent window as an argument to these calls.
 1. Optional: Force Input: If you find that pressing special keys like Escape or Control within Oracle Forms isn't working, consider adding the InputSimulatorPlus NuGet package to your project. This can force input into the Oracle Forms.
