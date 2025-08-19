@@ -1,36 +1,65 @@
 **C# Oracle Access Bridge Testing Solution**
 
-This repository contains A C# testing solution designed to help quality assurance engineers test Oracle forms. 
+This repository contains a C# testing solution designed to help quality assurance engineers test Oracle Forms. This solution provides a robust way to build and run automated tests for Oracle Forms both locally and in an Azure DevOps pipeline.
 
-You can't test Oracle forms with playwright or selenium because they can't access the Java JNLP window handles. You can however utilize the Oracle Access Bridge gaining access to all of the Java nodes for every form that is displayed in Oracle. By going through these nodes programmatically you can find the node you need by name or size or tag, and then you can manipulate that field or tag by clicking on XY or scrolling it or forcing text into a field or reading text from the node etc. It initially uses selenium to open a Chrome browser and log into Oracle forms from there it downloads the Java applet and runs it. Inside of each of the testing suites is a URL that will directly take you to the Oracle form you need however you don't need to rely on this you can use the menu and hat system I've built in. This is a great way to build out Oracle forms tests and to be able to run them locally and in Azure DevOps pipeline. Using this system I've created hundreds of tests covering all aspects of Oracle forms including manufacturing flow, AP, AR, GL, inventory, sales and shipping. 
+**Overview**
+
+Traditional automation tools like Playwright and Selenium are unable to interact with Java JNLP windows. This solution overcomes that limitation by leveraging the **Oracle Access Bridge (OAB)**, which provides access to all Java nodes within a displayed Oracle form.
+
+By programmatically navigating these nodes, you can:
+
+* Find specific elements by name, size, or tag.
+* Manipulate fields by clicking on coordinates, scrolling, entering text, or reading text from a node.
+
+The testing process begins with Selenium to open a Chrome browser and log into Oracle Forms. From there, it downloads and runs the Java applet. The solution includes a menu and navigation system, but you can also directly access a specific form via a URL provided within the testing suites.
+
+Using this framework, you can create comprehensive test suites for various aspects of Oracle Forms, including:
+* Manufacturing flow
+* Accounts Payable (AP)
+* Accounts Receivable (AR)
+* General Ledger (GL)
+* Inventory
+* Sales
+* Shipping
 
 **License**
 
-This solution is completely free to use under the MIT License. Feel free to fork, modify, and distribute it as needed for your testing requirements.
+This solution is freely available under the MIT License. Feel free to fork, modify, and distribute it for your testing requirements.
 
-**Prerequisites**
+Prerequisites
+To use this solution, you will need the **Access Bridge Explorer** tool. Although the tool itself is no longer maintained, its interoperability components are essential for this solution.
 
-To use this solution, you will need to download and utilize the Access Bridge Explorer tool. This tool, while abandoned approximately 10 years ago, provides the necessary interoperability components.
+You can find the Access Bridge Explorer repository here:
+<br>https://github.com/google/access-bridge-explorer
 
-**You can find the Access Bridge Explorer here:**
-
-https://github.com/google/access-bridge-explorer
-
-Important: You do not need to compile or use the entire Access Bridge Explorer solution. This testing solution only requires the WindowsAccessBridgeInterop project from its source code. Specifically, you will need the contents located at:
-
-https://github.com/google/access-bridge-explorer/tree/master/src/WindowsAccessBridgeInterop
+**Important:** You do not need the entire Access Bridge Explorer solution. This testing solution only requires the WindowsAccessBridgeInterop project from its source code. Specifically, you will need the contents located at:
+<br>https://github.com/google/access-bridge-explorer/tree/master/src/WindowsAccessBridgeInterop
 
 Integrate this specific component into your C# testing project to enable communication with the Oracle Access Bridge.
 
-**Steps to get this running**
+**Getting Started**
 
-1. Download and install JAVA. You do not need to install the JDK unlesss you want to. Latest version of JRE works even back as far as 2022 as long as it has "jabswitch.exe" in the Java bin directory.
-1. Enable the Oracle Access Bridge. You need to enable the OAB. Go to the directory where %JRE_HOME% is installed and find the "jabswitch" program, and run "jabswitch -enable". You should see a message that the OAB is activated.
-1. Modify your AppSettings.json file to enter your Connection Strings and Oracle Strings. The DownloadDirectory is where Chrome is going to place the java JNLP. Make sure this is a directory you have access to. If it's on a build server (for pipelines) make sure the USER has read/write access.
-1. Create a user secrets file and use as directed.
-1. Under pipelines in Azure Devops - create a pipeline and point it at the source code.
-1. BaseTest.cs is the starting point of the test. There is a line that lets you debug locally without closing or opening Chrome (it assumes you have Java already running). Set the BaseTestNoLaunch boolean accordingly to debug locally or when it runs in your pipeline.
-1. Move to your TestCases > SampleTestCase > SampleTest.cs. Here you can create the basics of your nUnit test cases with multiple parameters.
-1. The TestMethods > SampleTestMethod > SampleTestMethod.cs is where you can put calls in, or you can keep everything in your main method it's up to you.
-1. Under NodeExtensions > All the calls to Oracle are in here. Just pass the Oracle Window (parent) window each time.
-1. The only thing this project could probably be added is a way to force input into the Oracle forms using something like InputSimulatorPlus. If you find that pressing escape or control characters into the Oracle form isn't working, then use input simulator plus adding it to your project through a Nugent package.
+Follow these steps to get the testing solution up and running.
+
+* **Install Java**: Download and install the Java Runtime Environment (JRE). You do not need the JDK. Any version of JRE that includes jabswitch.exe in its bin directory will work.
+
+* **Enable the Oracle Access Bridge:**
+  - Navigate to your Java installation directory (%JRE_HOME%).
+  - Find the jabswitch program in the bin folder.
+  - Open a command prompt and run jabswitch -enable. You should see a confirmation message that the OAB is activated.
+
+* Configure Connection Strings: Modify the `AppSettings.json` file to enter your connection strings and Oracle-specific settings. The `DownloadDirectory` is where Chrome will place the Java JNLP file. Ensure that the user account running the tests (both locally and on a build server) has read and write access to this directory.
+
+* Configure Connection Strings: Modify the AppSettings.json file to enter your connection strings and Oracle-specific settings. The DownloadDirectory is where Chrome will place the Java JNLP file. Ensure that the user account running the tests (both locally and on a build server) has read and write access to this directory.
+
+* **Create User Secrets**: Create a user secrets file and configure it as needed for sensitive information.
+
+* Set up Azure DevOps Pipeline: In Azure DevOps, create a new pipeline and point it to the source code repository.
+
+* BaseTest.cs: This is the starting point for your tests. To debug locally without opening and closing a new Chrome instance for each test, set the BaseTestNoLaunch boolean to true. When running in the pipeline, this value should be false.
+
+* TestCases: Navigate to TestCases > SampleTestCase > SampleTest.cs to create the structure of your NUnit test cases, including any necessary parameters.
+
+* TestMethods: Use TestMethods > SampleTestMethod > SampleTestMethod.cs to organize your method calls, or you can keep everything within your main test method.
+1. NodeExtensions: All the calls to Oracle Forms are located in NodeExtensions. Pass the Oracle parent window as an argument to these calls.
+1. Optional: Force Input: If you find that pressing special keys like Escape or Control within Oracle Forms isn't working, consider adding the InputSimulatorPlus NuGet package to your project. This can force input into the Oracle Forms.
