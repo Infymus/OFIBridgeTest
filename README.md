@@ -61,4 +61,5 @@ Follow these steps to get the testing solution up and running.
 * **TestMethods**: Use TestMethods > SampleTestMethod > SampleTestMethod.cs to organize your method calls, or you can keep everything within your main test method.
  
 * **NodeExtensions**: All the calls to Oracle Forms are located in NodeExtensions. Pass the Oracle parent window as an argument to these calls.
-1. Optional: Force Input: If you find that pressing special keys like Escape or Control within Oracle Forms isn't working, consider adding the InputSimulatorPlus NuGet package to your project. This can force input into the Oracle Forms.
+
+* **Optional**: Force Input: If you find that pressing special keys like Escape or Control within Oracle Forms isn't working, consider adding the InputSimulatorPlus NuGet package to your project. This can force input into the Oracle Forms when other methods of .SendKeys() don't work.
