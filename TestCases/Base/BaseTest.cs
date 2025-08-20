@@ -83,9 +83,6 @@ namespace TestCases.TestMethods
             OraclePassword = configuration["OraclePassword"];
             var OracleConnectionName = configuration["OracleConnectionName"];
 
-            // Sales Person Name
-            SalesPersonName = configuration["SalesPersonName"];
-
             // Oracle Java Download Directory
             DownloadDirectory = configuration["DownloadDirectory"];
 
@@ -133,7 +130,6 @@ namespace TestCases.TestMethods
                 options.AddUserProfilePreference("download.default_directory", DownloadDirectory);
                 options.AddUserProfilePreference("profile.default_content_setting_values.automatic_downloads", 1);
                 options.AddArgument("--allow-running-insecure-content");
-                options.AddArgument("--unsafely-treat-insecure-origin-as-secure=*.ultradent.com");
                 options.AddArgument("--disable-features=InsecureDownloadWarnings");
                 options.AddUserProfilePreference("safebrowsing.enabled", true);
 
@@ -202,14 +198,14 @@ namespace TestCases.TestMethods
 
                 if (!BaseTestNoLaunch)
                 {
-                    // By this time Oracle should be running and we need to find the Ultradent Oracle Frame
+                    // By this time Oracle should be running
                     Window = (from jvm in jvms
                               from win in jvm.Windows
                               where win.GetTitle().Contains("Oracle Applications -")
                               select win).FirstOrDefault();
                     if (Window != null)
                     {
-                        DebugOutput("Oracle Applications - Ultradent - Java application window found");
+                        DebugOutput("Oracle Applications - Java application window found");
                         return;
                     }
                 }
@@ -223,7 +219,7 @@ namespace TestCases.TestMethods
                               select win).FirstOrDefault();
                     if (Window != null)
                     {
-                        DebugOutput("Oracle Applications - Ultradent - Java application window found");
+                        DebugOutput("Oracle Applications - Java application window found");
                         return;
                     }
                 }
